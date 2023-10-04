@@ -76,5 +76,31 @@ ALTER COLUMN INTRelation bit NOT NULL; --ADD NOT NULL CONSTRAINT
 
 -- Show me the newly updated table --
 SELECT *
-```
 FROM [dbo].[xAPI-Edu-Data]`
+```
+
+
+## Step 2 - Updating Column Names and Tidying Values in Columns
+
+
+### Updating Column Names
+
+
+Here, I changed the names of some columns to make sure they were a little bit more descriptive, clearer, and more pleasing (for my eyes). I changed the names of the following columns:
+
+`gender` to `Gender`  
+`NationalITy` to `Nationality`  
+`PlaceofBirth` to `BirthCountry`  
+`StageID` to `SchoolType`  
+`GradeID` to `GradeLevel`  
+`SectionID` to `Classroom`  
+`Topic` to `CourseSubject`  
+`Relation` to `ResponsibleParent`  
+`raisedhands` to `NumRaisedHands`  
+`VisITedResources` to `NumCourseResourcesUsed`  
+`AnnouncementsView` to `NumAnnouncementsViewed`  
+`Discussion` to `NumDiscussionParticipation`  
+`ParentschoolSatisfaction` to `ParentSatisfaction`  
+`StudentAbsenceDays` to `StudentAbsences`  
+
+I did this very simply in MSSQL by right clicking each column (Database\Table\Columns) and clicking "Rename", as shown below:
