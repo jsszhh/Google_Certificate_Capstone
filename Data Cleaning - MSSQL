@@ -3,8 +3,6 @@
 
 First, I import the dataset I want to use (found at https://www.kaggle.com/datasets/aljarah/xAPI-Edu-Data) into Microsoft SQL Server Management Studio (MSSQL). I save all my work under this database called "JACK_CAPSTONE".
 
-&nbsp;
-
 ## Step 1 - Boolean variables out of nominal collected data
 
 
