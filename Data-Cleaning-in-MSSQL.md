@@ -74,7 +74,7 @@ The problem here is that SQL removed the G but kept the - symbol when importing 
 
 ...and so on.
 
-I'll adjust the values in a sort of roundabout way, just because I have to use SQL. First, I'll change the data type for this column from `money` to `smallint` using the following code:
+I'll adjust the values in a sort of roundabout way, just because I have to use SQL. First, I'll change the data type for this column from `money` to `tinyint` using the following code:
 
 ```
 ALTER TABLE [dbo].[xAPI-Edu-Data]
@@ -101,7 +101,7 @@ UPDATE [dbo].[xAPI-Edu-Data]
 SET GradeLevel=ABS(GradeLevel)
 ```
 
-## Step 3 - Boolean columns out of nominal collected data
+## Step 3 - Boolean columns out of two-category nominal collected data
 
 
 I set up code to transform all binary (i.e., boolean) variables from their native qualitative (i.e., string, nominal format) into dummy coded format (i.e., 0 for one condition, 1 for the other). I store the new data into new columns, following a general naming convention CLEANED_*variablename*.
