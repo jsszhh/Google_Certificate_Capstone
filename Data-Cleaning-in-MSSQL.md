@@ -102,7 +102,7 @@ SET GradeLevel=ABS(GradeLevel)
 ## Step 3 - Boolean columns out of nominal collected data
 
 
-I set up code to transform all binary (i.e., boolean) variables from their native qualitative (i.e., string, nominal format) into dummy coded format (i.e., 0 for one condition, 1 for the other).
+I set up code to transform all binary (i.e., boolean) variables from their native qualitative (i.e., string, nominal format) into dummy coded format (i.e., 0 for one condition, 1 for the other). I store the new data into new columns, following a general naming convention CLEANED_*variablename*.
 
 ```
 USE [JACK_CAPSTONE]
@@ -194,9 +194,13 @@ It isn't possible to do nested set/where statements within a single UPDATE state
 ## Step 4 - Tidying values in columns
 
 
-There are a lot of values in this dataset that are still strangely formatted or misspelled, and will thus be a challenge to analyze later in Python/R/SPSS.
+There are a lot of values in this dataset that are still strangely formatted or misspelled, and will thus be a challenge to analyze later in Python/R/SPSS. To address these issues, I want to make new columns containing the cleaned versions of the problematic columns, following the earlier-established formatting approach of CLEANED_*variablename* for each new column.
 
-For instance, in the SchoolType column, we have 3 different values as follows:
+
+### SchoolType
+
+
+In the `SchoolType` column, we have 3 different values as follows:
 
 | studentID | SchoolType |
 | --------- | ---------- |
@@ -212,6 +216,90 @@ For instance, in the SchoolType column, we have 3 different values as follows:
 | 44        |highschool  |
 
 Here, I'll format `lowerlevel` to `Elementary`, and thus `middleschool` to `Middle` and `highschool` to `High` to make it easier for me to visually approach the data.
+
+First, I'll make a new column called `CLEANED_SchoolType` for the cleaned version of `SchoolType`:
+
+```
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ADD CLEANED_SchoolType nvarchar(50);
+```
+
+Then, I will update this new column with the transformed values from the initial `SchoolType` column, using the `UPDATE` and `CASE WHEN` functions:
+
+```
+UPDATE [dbo].[xAPI-Edu-Data]
+SET CLEANED_SchoolType = 
+		CASE
+			WHEN SchoolType = 'lowerlevel' THEN 'Elementary'
+			WHEN SchoolType = 'MiddleSchool' THEN 'Middle'
+			WHEN SchoolType = 'HighSchool' THEN 'High'
+		END
+```
+
+
+### Nationality
+
+
+In the `Nationality` column, we have a lot that needs to be addressed.
+
+First, we have `KW` to refer to `Kuwait` and `USA` to refer to the `United States of America` (i.e., country abbreviations), but then a large assortment of other countries all referred to by their full names, as in `Syria`, `Iran`, and others.
+
+Furthermore, we have misspelled or poorly formatted countries:
+
+`Tunis` is used to refer to `Tunisia`
+`venzuela` is used to refer to `Venezuela`
+`lebanon` is used to refer to `Lebanon`
+
+I can continue to use the `UPDATE` and `CASE WHEN` functions, as I did with `SchoolType`, to make these changes.
+
+First, I'll make a new column called `CLEANED_Nationality` for the cleaned version of `Nationality`:
+
+```
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ADD CLEANED_Nationality nvarchar(50);
+```
+
+Then, I will update this new column with the transformed values from the initial `Nationality` column:
+
+```
+UPDATE [dbo].[xAPI-Edu-Data]
+SET CLEANED_Nationality = 
+		CASE
+			WHEN Nationality = 'KW' THEN 'Kuwait'
+			WHEN Nationality = 'lebanon' THEN 'Lebanon'
+			WHEN Nationality = 'venzuela' THEN 'Venezuela'
+			WHEN Nationality = 'Tunis' THEN 'Tunisia'
+			ELSE Nationality
+		END
+```
+
+
+### BirthCountry
+
+
+A lot of the same issues from the `Nationality` column exist here in the `BirthCountry` column:
+
+`Kuwait` is written as `KuwaIT`  
+`Lebanon` is written as `lebanon` again  
+`Venezuela` is written as `venzuela` again  
+`Tunisia` is written as `Tunis` again  
+
+I'll fix these with the same lines of code that I used to fix `Nationality` and `SchoolType`.
+
+```
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ADD CLEANED_BirthCountry nvarchar(50);
+
+UPDATE [dbo].[xAPI-Edu-Data]
+SET CLEANED_BirthCountry = 
+		CASE
+			WHEN BirthCountry = 'KuwaIT' THEN 'Kuwait'
+			WHEN BirthCountry = 'lebanon' THEN 'Lebanon'
+			WHEN BirthCountry = 'venzuela' THEN 'Venezuela'
+			WHEN BirthCountry = 'Tunis' THEN 'Tunisia'
+			ELSE BirthCountry
+		END
+```
 
 
 
