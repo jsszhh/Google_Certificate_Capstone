@@ -150,7 +150,7 @@ WHERE [Semester] = 'S'; --UPDATE VALUES IN DUMMY COLUMN
 ALTER TABLE [dbo].[xAPI-Edu-Data]
 ALTER COLUMN CLEANED_Semester bit NOT NULL; --ADD NOT NULL CONSTRAINT
 
--- Relationship to Parent --
+-- Responsible Parent --
 ALTER TABLE [dbo].[xAPI-Edu-Data]
 ADD CLEANED_Resp_Parent bit;
 GO --CREATING THE NEW DUMMY COLUMN
@@ -313,8 +313,233 @@ SET ResponsibleParent =
 ```
 
 
-## Step 5 - Changing the rest of the nominal (categorical) columns to integers
+## Step 5 (optional) - Changing the rest of the nominal (categorical) columns to integers
 
-Finally, to make the dataset the most approachable for analysis, I want to transform the remaining nominal variables (things like `Nationality` and `BirthCountry`) to numerical values (1, 2, 3, ...).
+This final step is optional because it ultimately depends on the types of analyses that we would be running for our stakeholders.
 
-To retain the original data, I will make separate columns for the new cleaned variables, as I did above for the boolean transformations.
+We already cleaned `SchoolType`, `Nationality`, and `BirthCountry`, while keeping them in nominal categories. To stay consistent with the cleaned variables that we transformed to integer values (`Absences`, `Gender`, `Semester`, `ResponsibleParent`, and `ParentSatisfaction`), I'll make new variables to transform `SchoolType`, `Nationality`, and `BirthCountry` to integers as well. I'll also go ahead and transform `Classroom` (A, B, C), `CourseSubject` (IT, English, Spanish, French, Arabic, Math, Chemistry, Biology, Science, History, Quran, Biology), `CourseGrade` (our predictor variable; L, M, H)
+
+To retain the original data, however, I will make separate columns for the new cleaned variables, as I did above for the boolean transformations. These column headers will have the same CLEANED_*variablename* naming convention, but it will be CLEANED_INT_*variablename* ('INT' for *integer*).
+
+
+```
+USE [JACK_CAPSTONE]
+GO
+
+-- SchoolType --
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ADD CLEANED_INT_SchoolType tinyint;
+GO
+
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_SchoolType] = 1
+WHERE [CLEANED_SchoolType] = 'Elementary';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_SchoolType] = 2
+WHERE [CLEANED_SchoolType] = 'Middle';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_SchoolType] = 3
+WHERE [CLEANED_SchoolType] = 'High';
+
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ALTER COLUMN CLEANED_INT_SchoolType tinyint NOT NULL;
+
+-- Nationality --
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ADD CLEANED_INT_Nationality tinyint;
+GO
+
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 1
+WHERE [CLEANED_Nationality] = 'Kuwait';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 2
+WHERE [CLEANED_Nationality] = 'Lebanon';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 3
+WHERE [CLEANED_Nationality] = 'Egypt';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 4
+WHERE [CLEANED_Nationality] = 'SaudiArabia';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 5
+WHERE [CLEANED_Nationality] = 'USA';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 6
+WHERE [CLEANED_Nationality] = 'Jordan';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 7
+WHERE [CLEANED_Nationality] = 'Venezuela';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 8
+WHERE [CLEANED_Nationality] = 'Iran';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 9
+WHERE [CLEANED_Nationality] = 'Tunisia';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 10
+WHERE [CLEANED_Nationality] = 'Morocco';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 11
+WHERE [CLEANED_Nationality] = 'Syria';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 12
+WHERE [CLEANED_Nationality] = 'Palestine';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 13
+WHERE [CLEANED_Nationality] = 'Iraq';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Nationality] = 14
+WHERE [CLEANED_Nationality] = 'Lybia';
+
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ALTER COLUMN CLEANED_INT_Nationality tinyint NOT NULL;
+
+-- BirthCountry --
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ADD CLEANED_INT_BirthCountry tinyint;
+GO
+
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 1
+WHERE [CLEANED_BirthCountry] = 'Kuwait';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 2
+WHERE [CLEANED_BirthCountry] = 'Lebanon';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 3
+WHERE [CLEANED_BirthCountry] = 'Egypt';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 4
+WHERE [CLEANED_BirthCountry] = 'SaudiArabia';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 5
+WHERE [CLEANED_BirthCountry] = 'USA';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 6
+WHERE [CLEANED_BirthCountry] = 'Jordan';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 7
+WHERE [CLEANED_BirthCountry] = 'Venezuela';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 8
+WHERE [CLEANED_BirthCountry] = 'Iran';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 9
+WHERE [CLEANED_BirthCountry] = 'Tunisia';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 10
+WHERE [CLEANED_BirthCountry] = 'Morocco';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 11
+WHERE [CLEANED_BirthCountry] = 'Syria';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 12
+WHERE [CLEANED_BirthCountry] = 'Palestine';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 13
+WHERE [CLEANED_BirthCountry] = 'Iraq';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_BirthCountry] = 14
+WHERE [CLEANED_BirthCountry] = 'Lybia';
+
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ALTER COLUMN CLEANED_INT_BirthCountry tinyint NOT NULL;
+
+-- CourseGrade --
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ADD CLEANED_INT_CourseGrade tinyint;
+GO
+
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseGrade] = 1
+WHERE [CourseGrade] = 'L';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseGrade] = 2
+WHERE [CourseGrade] = 'M';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseGrade] = 3
+WHERE [CourseGrade] = 'H';
+
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ALTER COLUMN CLEANED_INT_CourseGrade tinyint NOT NULL;
+
+-- Classroom --
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ADD CLEANED_INT_Classroom tinyint;
+GO
+
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Classroom] = 1
+WHERE [Classroom] = 'A';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Classroom] = 2
+WHERE [Classroom] = 'B';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_Classroom] = 3
+WHERE [Classroom] = 'C';
+
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ALTER COLUMN CLEANED_INT_Classroom tinyint NOT NULL;
+
+-- CourseSubject --
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ADD CLEANED_INT_CourseSubject tinyint;
+GO
+
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 1
+WHERE [CourseSubject] = 'English';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 2
+WHERE [CourseSubject] = 'Spanish';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 3
+WHERE [CourseSubject] = 'French';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 4
+WHERE [CourseSubject] = 'Arabic';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 5
+WHERE [CourseSubject] = 'IT';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 6
+WHERE [CourseSubject] = 'Math';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 7
+WHERE [CourseSubject] = 'Chemistry';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 8
+WHERE [CourseSubject] = 'Biology';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 9
+WHERE [CourseSubject] = 'Science';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 10
+WHERE [CourseSubject] = 'History';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 11
+WHERE [CourseSubject] = 'Quran';
+UPDATE [dbo].[xAPI-Edu-Data]
+SET [CLEANED_INT_CourseSubject] = 12
+WHERE [CourseSubject] = 'Geology';
+
+
+ALTER TABLE [dbo].[xAPI-Edu-Data]
+ALTER COLUMN CLEANED_INT_CourseSubject tinyint NOT NULL;
+
+
+SELECT * FROM [dbo].[xAPI-Edu-Data]
+```
+
+
+## Step 6 - Exporting the data to a .csv for analysis in spreadsheets/R/Python/SPSS
+
+
+This step is fairly straightforward. I right click in the top left corner of the table in the query results window (as shown below), and click "Copy with Headers." Then I simply paste the data into an Excel spreadsheet.
+
+
+![Screenshot 2023-10-05 074019](https://github.com/jsszhh/Google-Certificate-Capstone/assets/146851092/e88644fa-0959-47fd-8879-391bad7b5574)
+
+
+I have now finished cleaning my data. Beyond this, I can continue to conduct any analyses I want in SQL, or take the new .CSV file and conduct analyses in any other analytical software I want, do analyses in Excel itself, or make visualizations in Tableau.
