@@ -105,9 +105,6 @@ SET GradeLevel=ABS(GradeLevel)
 I set up code to transform all binary (i.e., boolean) variables from their native qualitative (i.e., string, nominal format) into dummy coded format (i.e., 0 for one condition, 1 for the other). I store the new data into new columns, following a general naming convention CLEANED_*variablename*.
 
 ```
-USE [JACK_CAPSTONE]
-GO
-
 -- Absences --
 ALTER TABLE [dbo].[xAPI-Edu-Data]
 ADD CLEANED_Absences bit;
@@ -136,7 +133,7 @@ SET [CLEANED_Gender]= 1
 WHERE [Gender] = 'F'; --UPDATE VALUES IN DUMMY COLUMN
 
 ALTER TABLE [dbo].[xAPI-Edu-Data]
-ALTER COLUMN INTGender bit NOT NULL; --ADD NOT NULL CONSTRAINT
+ALTER COLUMN CLEANED_Gender bit NOT NULL; --ADD NOT NULL CONSTRAINT
 
 -- Semester --
 ALTER TABLE [dbo].[xAPI-Edu-Data]
@@ -160,7 +157,7 @@ GO --CREATING THE NEW DUMMY COLUMN
 
 UPDATE [dbo].[xAPI-Edu-Data]
 SET [CLEANED_Resp_Parent] = 0
-WHERE [ResponsibleParent]= 'Mum';
+WHERE [ResponsibleParent]= 'Mother';
 UPDATE [dbo].[xAPI-Edu-Data]
 SET [CLEANED_Resp_Parent] = 1
 WHERE [ResponsibleParent]= 'Father'; --UPDATE VALUES IN DUMMY COLUMN
@@ -184,8 +181,7 @@ ALTER TABLE [dbo].[xAPI-Edu-Data]
 ALTER COLUMN CLEANED_Par_Satisfaction bit NOT NULL; --finally, I update the column I just made to have the NOT NULL CONSTRAINT
 
 -- Show me the newly updated table --
-SELECT *
-FROM [dbo].[xAPI-Edu-Data]
+SELECT * FROM [dbo].[xAPI-Edu-Data]
 ```
 
 It isn't possible to do nested set/where statements within a single UPDATE statement, so I had to create separate UPDATE, SET, and WHERE statements for each variable I wanted to update (and, subsequently, each value within each of those variables).
