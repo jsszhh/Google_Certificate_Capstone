@@ -52,10 +52,10 @@ RENAME COLUMN OldColumnName TO NewColumnName;
 ```
 
 
-## Step 2 - Fixing an incorrect data type
+## Step 2 - Fixing incorrect data types
 
 
-There are some data types which are incorrect in this dataset. Specifically:
+There is one data type in this column which is incorrect:
 
 `GradeLevel` is set to `money`
 
@@ -69,8 +69,10 @@ However, the reason this is the case is because the data is inputted in the .csv
 
 The problem here is that SQL removed the G but kept the - symbol when importing the dataset, leaving me with:
 
-`-1` to mean `First Grade`  
-`-2` to mean `Second Grade`
+`-1.00` to mean `First Grade`  
+`-2.00` to mean `Second Grade`
+
+...and so on.
 
 I'll adjust the values in a sort of roundabout way, just because I have to use SQL. First, I'll change the data type for this column from `money` to `smallint` using the following code:
 
@@ -543,3 +545,6 @@ This step is fairly straightforward. I right click in the top left corner of the
 
 
 I have now finished cleaning my data. Beyond this, I can continue to conduct any analyses I want in SQL, or take the new .CSV file and conduct analyses in any other analytical software I want, do analyses in Excel itself, or make visualizations in Tableau.
+
+
+**I want to make a final note.** I am fully aware that the entirety of this cleaning process could have been in Excel, Python, or R with substantially more ease and fewer steps. However, I wanted to lock myself to SQL to really hammer down the code. In the future, I will probably clean data in another program if possible.
