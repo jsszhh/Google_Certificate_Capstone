@@ -1,9 +1,9 @@
 # Cleaning my Data in SQL
 
 
-First, I import the dataset I want to use (found at https://www.kaggle.com/datasets/aljarah/xAPI-Edu-Data) into Microsoft SQL Server Management Studio (MSSQL).
+I save all my work under a database called "JACK_CAPSTONE", saved on my machine. I open the database in Microsoft SQL Server Management Studio (MSSQL).
 
-I save all my work under a database called "JACK_CAPSTONE", saved on my machine.
+First, I import the dataset I want to use (found at https://www.kaggle.com/datasets/aljarah/xAPI-Edu-Data), so now it is stored in MSSQL as [dbo].[xAPI-Edu-Data]. This is what will be used to refer to this dataset (i.e., table) throughout the entire querying process.
 
 
 ## Step 0 - Making a primary key
@@ -140,18 +140,18 @@ ALTER COLUMN INTGender bit NOT NULL; --ADD NOT NULL CONSTRAINT
 
 -- Semester --
 ALTER TABLE [dbo].[xAPI-Edu-Data]
-ADD CLEANED_Sem bit;
+ADD CLEANED_Semester bit;
 GO --CREATING THE NEW DUMMY COLUMN
 
 UPDATE [dbo].[xAPI-Edu-Data]
-SET [CLEANED_Sem] = 0
+SET [CLEANED_Semester] = 0
 WHERE [Semester] = 'F';
 UPDATE [dbo].[xAPI-Edu-Data]
-SET [CLEANED_Sem] = 1
+SET [CLEANED_Semester] = 1
 WHERE [Semester] = 'S'; --UPDATE VALUES IN DUMMY COLUMN
 
 ALTER TABLE [dbo].[xAPI-Edu-Data]
-ALTER COLUMN CLEANED_Sem bit NOT NULL; --ADD NOT NULL CONSTRAINT
+ALTER COLUMN CLEANED_Semester bit NOT NULL; --ADD NOT NULL CONSTRAINT
 
 -- Relationship to Parent --
 ALTER TABLE [dbo].[xAPI-Edu-Data]
@@ -301,6 +301,20 @@ SET CLEANED_BirthCountry =
 		END
 ```
 
+
+### ResponsibleParent
+
+
+This last one is entirely optional, and many analysts may choose to ignore this, but I don't like that one of the values is `Mum` and the other is `Father`. Instead, I'll just change the `Mum` values to `Mother` in this column (no need to make a CLEANED column for such a small change).
+
+```
+UPDATE [dbo].[xAPI-Edu-Data]
+SET ResponsibleParent = 
+		CASE
+			WHEN ResponsibleParent = 'Mum' THEN 'Mother'
+			ELSE ResponsibleParent
+		END
+```
 
 
 ## Step 5 - Changing the rest of the nominal (categorical) columns to integers
