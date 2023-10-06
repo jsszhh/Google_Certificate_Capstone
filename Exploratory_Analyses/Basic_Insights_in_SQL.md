@@ -104,4 +104,39 @@ Let's move on to getting a basic look at the relationships between some of the i
 
 ### Some relationships between IVs and the DV
 
-The DV in this dataset is `CourseGrade`, which we've cleaned up and renamed to `CLEANED_INT_CourseGrade`. We'll use this 
+The DV in this dataset is `CourseGrade`, which we've cleaned up and renamed to `CLEANED_INT_CourseGrade`. Let's explore with the naked eye how some IVs may relate to the DV.
+
+In the above analyses, we found a potential trend that middle schoolers may be more engaged in their academics than elementary and high schoolers. We may be able to explore this a little further now by seeing how many students fell into the _Low, Medium, and High_ course grade brackets in each school type.
+
+```
+BEGIN
+
+-- STEP 1 --
+
+DECLARE @NUM_EachSchool TABLE (School_Type NVARCHAR(50), Students_per_School DECIMAL(20, 7))
+INSERT INTO @NUM_EachSchool (School_Type, Students_per_School)
+SELECT CLEANED_SchoolType,
+	COUNT (CLEANED_INT_SchoolType)
+FROM [dbo].[CLEANED_CAPSTONE_DATA]
+GROUP BY CLEANED_SchoolType;
+SELECT * FROM @NUM_EachSchool;
+
+-- STEP 2 --
+
+DECLARE @NUM_EachSchool_Grade TABLE (Type_School NVARCHAR(50), Course_Grade DECIMAL(20, 7), Students_per_Grade DECIMAL(20, 7))
+INSERT INTO @NUM_EachSchool_Grade (Type_School, Course_Grade, Students_per_Grade)
+SELECT CLEANED_SchoolType,
+	CLEANED_INT_CourseGrade,
+	COUNT (CLEANED_INT_CourseGrade)
+FROM [dbo].[CLEANED_CAPSTONE_DATA]
+GROUP BY CLEANED_SchoolType, CLEANED_INT_CourseGrade;
+SELECT * FROM @NUM_EachSchool_Grade;
+
+-- STEP 3 --
+
+SELECT Type_School, Course_Grade, Students_per_Grade, Students_per_School, CONVERT(DECIMAL(20, 7), ((Students_per_Grade*100)/Students_per_School)) AS Percentage_per_Grade
+FROM @NUM_EachSchool_Grade
+JOIN @NUM_EachSchool ON Type_School = School_Type
+
+END
+```
