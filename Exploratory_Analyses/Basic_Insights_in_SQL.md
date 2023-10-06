@@ -18,6 +18,7 @@ I'll first explore by eye what kinds of basic correlations exist among the IVs, 
 
 ### Some relationships among IVs
 
+
 First, we can ask, **"Is there a relationship between _hand raising_ and a student's level of education (i.e., `SchoolType`)?"**
 
 To answer this, we can get an `AVG` of hand raising across school type using the `GROUP BY` function:
@@ -103,6 +104,7 @@ Let's move on to getting a basic look at the relationships between some of the i
 
 
 ### A relationship between an IV and a DV
+
 
 The DV in this dataset is `CourseGrade`, which we've cleaned up and renamed to `CLEANED_INT_CourseGrade`. Let's dive into the DV a little bit here in SQL.
 
@@ -237,7 +239,9 @@ High schoolers had the largest proportion of _High_ course grades, 33.33%.
 
 These results are surprising when compared to the earlier insights we received from our preliminary comparisons of the school types among other IVs.
 
+
 ### Next steps - Beyond SQL
+
 
 We've done some basic exploration of the trends between the IVs and between an IV and a DV. In SQL, these analyses don't go much further, as statistical tests are not part of the functionality of this programming language.
 
