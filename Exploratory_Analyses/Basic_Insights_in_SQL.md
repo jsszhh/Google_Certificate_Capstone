@@ -1,7 +1,7 @@
 # Methodology
 
 
-As I am working through this capstone, I had a goal of doing a large chunk of my work in SQL to really dive into and immerse myself in all the skills and applications I learned throughout the Google Certificate. I will continue this methodology here as I explore the dataset for basic instincts, but there are some key weaknesses in SQL which incentivize one to use another analytical software package (e.g., Python, R, SPSS) or even Excel for most of the analytical tasks (even cleaning).
+As I am working through this capstone, I had a goal of doing a large chunk of my work in SQL to really dive into and immerse myself in all the skills and applications I learned throughout the Google Certificate. I will continue this approach here as I explore the dataset for basic insights, but there are some key weaknesses in SQL which incentivize one to use another analytical software package (e.g., Python, R, SPSS) or even Excel for most of their analytical tasks (even cleaning).
 
 I will continue the goal I set out with and explore some of the relationships between variables in this dataset in SQL, but then I will transition to Python for the rest of my work.
 
