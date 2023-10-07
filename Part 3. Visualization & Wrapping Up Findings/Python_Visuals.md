@@ -84,4 +84,14 @@ In a machine learning model, however, ranking the IVs roughly means highlighting
 
 Generally, the model which performed the best would be the most accurate in telling us the IVs. In this case, therefore, we need to look at the most important variables (or features) from the RFC model.
 
+Here is that feature importances chart:
 
+
+![Screenshot 2023-10-07 133915](https://github.com/jsszhh/Google_Certificate_Capstone/assets/146851092/7decf509-e680-4e10-bea8-0c97aafbcdbb)
+
+
+_Note._ The variables have different names here than the correlations plot above. There was an issue with some of the variable names in Python, so in an effort to save time, I reverted to an earlier version of the dataset which had these variable names. Interpretations remain analogous for the variables.
+
+This chart shows that the most important IV for predicting a student's grade bracket was the number of times they accessed and used course resources.
+
+After that, how many times the student raised their hands, viewed announcements, and participated in classroom discussions were the most impactful IVs.
