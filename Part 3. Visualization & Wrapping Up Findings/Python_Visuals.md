@@ -1,1 +1,1 @@
-During the data analysis phase of this project, I created several visualizations which were interpretable and others which would not be of much relevance to the majority of potential stakeholders in this field.
+During the data analysis phase of this project, I created several visualizations which were interpretable and others which would not be of much relevance to the majority of potential stakeholders of this project.
