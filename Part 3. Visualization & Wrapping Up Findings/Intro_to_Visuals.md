@@ -14,7 +14,7 @@ As such, I will create most of my visuals in Tableau.
 
 However, some visuals (such as pairwise correlation scatterplots) cannot be made in Tableau, and as such will be created in Python and linked here.
 
-## Tableau vs. Python - Purpose
+## Tableau vs. Python - Different Purposes
 
 Visuals created in Tableau are used for presenting to stakeholders or clients with less understanding of statistical modeling concepts.
 
