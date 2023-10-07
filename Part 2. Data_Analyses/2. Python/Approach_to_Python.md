@@ -14,4 +14,4 @@ In machine learning approaches, the goal is to train a model to sort data points
 
 This is a good start to diving into the dataset because it can highlight the most important variables (features) from the model(s) that best predict the DV.
 
-[Here is the link to the Jupyter Notebook containing all the Python work I did for this step.](https://github.com/jsszhh/Google_Certificate_Capstone/blob/main/Exploratory_Analyses/2.%20Python/PYTHON_ML_ANALYSES.ipynb "Machine Learning Jupyter Notebook") (_Note._ The Jupyter Notebook file is in this repository, directly below this file in this folder.)
+[Here is the link to the Jupyter Notebook containing all the Python work I did for this step.](https://github.com/jsszhh/Google_Certificate_Capstone/blob/main/Part%202.%20Data_Analyses/2.%20Python/PYTHON_ML_ANALYSES.ipynb") (_Note._ The Jupyter Notebook file is in this repository, directly below this file in this folder.)
