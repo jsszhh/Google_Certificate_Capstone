@@ -21,3 +21,5 @@ I also made a tree map which shows the distribution of students in each grade br
 
 
 (_Note._ This chart was mostly just for practice assembling and tweaking the elements of a tree map, like the coloration and percentage formula on the individual tiles.)
+
+The charts I made can be seen at my [TableauPublic profile.](https://public.tableau.com/app/profile/jack.hanna/vizzes)
