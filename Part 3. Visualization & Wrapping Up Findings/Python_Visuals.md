@@ -94,4 +94,6 @@ _Note._ The variables have different names here than the correlations plot above
 
 This chart shows that the most important IV for predicting a student's grade bracket was the number of times they accessed and used course resources.
 
-After that, how many times the student raised their hands, viewed announcements, and participated in classroom discussions were the most impactful variables for determining a student's success in their studies that year.
+After that, how many times the student raised their hands, viewed announcements, and participated in classroom discussions were the most impactful IVs.
+
+It may be the case that academic engagement behaviors such as using course materials and raising hand in class to participate may be best at determining a student's success in their studies. Future studies would be necessary to determine this relationship.
