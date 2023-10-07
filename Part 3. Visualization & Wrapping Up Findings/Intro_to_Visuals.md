@@ -11,3 +11,11 @@ Visualizations can be done in Tableau and Python. There are many advantages of d
 Nevertheless, the key advantage of Tableau is its ease of use. To create charts, one must simply drag and drop elements onto a worksheet and the table is automatically produced.
 
 As such, I will create most of my visuals in Tableau.
+
+However, some visuals (such as pairwise correlation scatterplots) cannot be made in Tableau, and as such will be created in Python and linked here.
+
+## Tableau vs. Python - Purpose
+
+Visuals created in Tableau are used for presenting to stakeholders or clients with less understanding of statistical modeling concepts.
+
+Visuals created in Python are used for presenting to an audience with greater understanding of statistics.
