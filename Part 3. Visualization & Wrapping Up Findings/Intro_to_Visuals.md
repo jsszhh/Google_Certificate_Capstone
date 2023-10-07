@@ -18,4 +18,4 @@ However, some visuals (such as pairwise correlation scatterplots) cannot be made
 
 Visuals created in Tableau are used for presenting to stakeholders or clients with less understanding of statistical modeling concepts.
 
-Visuals created in Python are used for presenting to an audience with greater understanding of statistics.
+Visuals created in Python are used for presenting to an audience with greater understanding of statistics and the underlying predictive/analytical meaning of the statistical method.
