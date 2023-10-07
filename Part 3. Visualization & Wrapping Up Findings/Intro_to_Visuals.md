@@ -8,5 +8,6 @@ Visualizations can be done in Tableau and Python. There are many advantages of d
 4. Raises efficiency, as no data needs to be exported out of Python and imported into Tableau
 5. Code can be saved for later projects and even replications of the same project, allowing for efficient creation of future visuals
 
+Nevertheless, the key advantage of Tableau is its ease of use. To create charts, one must simply drag and drop elements onto a worksheet and the table is automatically produced.
 
-As such, I will create most of my visuals in Python. However, I'll still practice my Tableau skills with some visualizations here.
+As such, I will create most of my visuals in Tableau.
